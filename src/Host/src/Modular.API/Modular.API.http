@@ -1,6 +1,8 @@
 @Modular.API_HostAddress = http://localhost:5001
 
-GET {{Modular.API_HostAddress}}/weatherforecast/
+GET {{Modular.API_HostAddress}}/health/live
+
+
 Accept: application/json
 
 ###
