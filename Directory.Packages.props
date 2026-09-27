@@ -5,6 +5,8 @@
   <ItemGroup>
     <!-- Production code libraries -->
     <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="10.0.12" />
+    <PackageVersion Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.24.1-preview.1" />
+    <PackageVersion Include="NetArchTest.Rules" Version="1.3.2" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.15.0.120848" />
     <!-- Test code libraries -->
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />

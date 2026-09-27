@@ -1,4 +1,6 @@
-namespace Modular.Shared.Domain.Entities;
+using Modular.Shared.Domain.Entities;
+
+namespace Modular.Shared.Domain.Events;
 
 /// <summary>
 /// Something that happened in the domain that other parts of the system may need to

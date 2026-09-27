@@ -1,3 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Shared\src\Modular.Shared.Infrastructure\Modular.Shared.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modular.Tenancy.Application\Modular.Tenancy.Application.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Persistence\Configurations\" />
+    <Folder Include="Persistence\Repositories\" />
+  </ItemGroup>
 </Project>

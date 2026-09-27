@@ -1,3 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Shared\src\Modular.Shared.Contracts\Modular.Shared.Contracts.csproj" />
+  </ItemGroup>
 </Project>

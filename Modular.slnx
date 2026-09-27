@@ -36,8 +36,14 @@
   </Folder>
   <Folder Name="/src/Shared/" />
   <Folder Name="/src/Shared/src/">
+    <Project Path="src/Shared/src/Modular.Shared.Application/Modular.Shared.Application.csproj" Id="54f83ec2-6ccf-479d-a43d-eb17803179bb" />
+    <Project Path="src/Shared/src/Modular.Shared.Contracts/Modular.Shared.Contracts.csproj" Id="b4f103cd-c32f-4848-9bfb-96e625cde188" />
     <Project Path="src/Shared/src/Modular.Shared.Domain/Modular.Shared.Domain.csproj" />
+    <Project Path="src/Shared/src/Modular.Shared.Endpoints/Modular.Shared.Endpoints.csproj" Id="6dcd73fa-7469-4774-b077-5b6632154470" />
+    <Project Path="src/Shared/src/Modular.Shared.Infrastructure/Modular.Shared.Infrastructure.csproj" Id="3e6e15bb-f676-4b84-946e-728e3c2e5a4f" />
   </Folder>
   <Folder Name="/src/Shared/test/" />
-  <Folder Name="/tests/" />
+  <Folder Name="/tests/">
+    <Project Path="tests/Modular.Architecture.Tests/Modular.Architecture.Tests.csproj" Id="ad1bdd35-434e-4646-9644-22eb2ba85c4f" />
+  </Folder>
 </Solution>

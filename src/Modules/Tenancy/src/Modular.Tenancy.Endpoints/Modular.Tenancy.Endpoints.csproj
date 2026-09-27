@@ -1,3 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+  <ItemGroup>
+    <ProjectReference Include="..\Modular.Tenancy.Contracts\Modular.Tenancy.Contracts.csproj" />
+  </ItemGroup>
 </Project>

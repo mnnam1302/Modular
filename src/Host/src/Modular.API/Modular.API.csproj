@@ -1,7 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
+  <PropertyGroup>
+    <UserSecretsId>431224f9-4926-4c62-bf96-ad667e669399</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..\..\..</DockerfileContext>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Modules\Tenancy\src\Modular.Tenancy.Endpoints\Modular.Tenancy.Endpoints.csproj" />
+    <ProjectReference Include="..\..\..\Modules\Tenancy\src\Modular.Tenancy.Infrastructure\Modular.Tenancy.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

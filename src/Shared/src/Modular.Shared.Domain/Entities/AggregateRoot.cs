@@ -1,3 +1,5 @@
+using Modular.Shared.Domain.Events;
+
 namespace Modular.Shared.Domain.Entities;
 
 /// <inheritdoc cref="IAggregateRoot{TKey}" />

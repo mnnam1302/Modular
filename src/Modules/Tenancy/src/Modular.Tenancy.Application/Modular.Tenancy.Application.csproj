@@ -1,7 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Shared\src\Modular.Shared.Application\Modular.Shared.Application.csproj" />
+    <ProjectReference Include="..\Modular.Tenancy.Contracts\Modular.Tenancy.Contracts.csproj" />
     <ProjectReference Include="..\Modular.Tenancy.Domain\Modular.Tenancy.Domain.csproj" />
   </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Features\" />
+    </ItemGroup>
 
 </Project>

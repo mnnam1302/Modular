@@ -1,0 +1,7 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Folder Include="Messaging\" />
+    <Folder Include="Behaviors\" />
+    <Folder Include="Abstractions\" />
+  </ItemGroup>
+</Project>
