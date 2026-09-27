@@ -1,0 +1,43 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Folder Name="/src/" />
+  <Folder Name="/src/Host/" />
+  <Folder Name="/src/Host/src/">
+    <Project Path="src/Host/src/Modular.API/Modular.API.csproj" Id="6063ab72-1492-4576-b09e-cd6a9466a1be" />
+  </Folder>
+  <Folder Name="/src/Host/test/" />
+  <Folder Name="/src/Modules/" />
+  <Folder Name="/src/Modules/Gateway/" />
+  <Folder Name="/src/Modules/Identity/" />
+  <Folder Name="/src/Modules/Identity/src/">
+    <Project Path="src/Modules/Identity/src/Modular.Identity.Application/Modular.Identity.Application.csproj" Id="ee9a62f2-0830-4a15-b4fb-ea1f6bef6760" />
+    <Project Path="src/Modules/Identity/src/Modular.Identity.Contracts/Modular.Identity.Contracts.csproj" Id="15d6f9e8-4a74-48c2-ab27-92d9e3507a17" />
+    <Project Path="src/Modules/Identity/src/Modular.Identity.Domain/Modular.Identity.Domain.csproj" Id="ad566051-16b0-4c9c-aa85-b2545f01c4f9" />
+    <Project Path="src/Modules/Identity/src/Modular.Identity.Endpoints/Modular.Identity.Endpoints.csproj" Id="2652e569-3f90-4c98-9d0b-a7e8c21a7554" />
+    <Project Path="src/Modules/Identity/src/Modular.Identity.Infrastructure/Modular.Identity.Infrastructure.csproj" Id="87f7f6d1-0e09-4cd7-ac05-39f92e0d4f63" />
+  </Folder>
+  <Folder Name="/src/Modules/Identity/test/">
+    <Project Path="src/Modules/Identity/test/Modular.Identity.Tests/Modular.Identity.Tests.csproj" Id="5ca6c8d8-affa-4b20-b71a-54f9c8f41c90" />
+  </Folder>
+  <Folder Name="/src/Modules/Tenancy/" />
+  <Folder Name="/src/Modules/Tenancy/src/">
+    <Project Path="src/Modules/Tenancy/src/Modular.Tenancy.Application/Modular.Tenancy.Application.csproj" />
+    <Project Path="src/Modules/Tenancy/src/Modular.Tenancy.Contracts/Modular.Tenancy.Contracts.csproj" />
+    <Project Path="src/Modules/Tenancy/src/Modular.Tenancy.Domain/Modular.Tenancy.Domain.csproj" />
+    <Project Path="src/Modules/Tenancy/src/Modular.Tenancy.Endpoints/Modular.Tenancy.Endpoints.csproj" Id="95ddea42-417e-46cc-9396-f39406a9e82e" />
+    <Project Path="src/Modules/Tenancy/src/Modular.Tenancy.Infrastructure/Modular.Tenancy.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Tenancy/test/">
+    <Project Path="src/Modules/Tenancy/test/Modular.Tenancy.Tests/Modular.Tenancy.Tests.csproj" Id="8c6fd34b-b0f6-412d-b70b-073c0999a185" />
+  </Folder>
+  <Folder Name="/src/Shared/" />
+  <Folder Name="/src/Shared/src/">
+    <Project Path="src/Shared/src/Modular.Shared.Domain/Modular.Shared.Domain.csproj" />
+  </Folder>
+  <Folder Name="/src/Shared/test/" />
+  <Folder Name="/tests/" />
+</Solution>

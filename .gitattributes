@@ -1,0 +1,9 @@
+# Normalize line endings: LF in the repo and working tree (matches .editorconfig end_of_line = lf)
+* text=auto eol=lf
+
+# Windows-only scripts keep CRLF
+*.{cmd,bat} text eol=crlf
+
+*.png binary
+*.jpg binary
+*.ico binary

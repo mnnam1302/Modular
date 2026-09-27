@@ -1,0 +1,33 @@
+<Project>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <!-- Analyzers & code style -->
+  <PropertyGroup>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <AnalysisMode>All</AnalysisMode>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <!-- Required for IDE0005 (unused usings) to run on build: https://github.com/dotnet/roslyn/issues/41640 -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- CS1591: missing XML comment on public member - noise until the public API stabilizes -->
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <!-- Nullable warnings are always errors (see .editorconfig TIER 1) -->
+    <WarningsAsErrors>$(WarningsAsErrors);nullable</WarningsAsErrors>
+  </PropertyGroup>
+
+  <!-- Warnings are yellow locally, fail the build in CI (CI=true is set by GitHub Actions / Azure DevOps / GitLab) -->
+  <PropertyGroup Condition="'$(CI)' == 'true' or '$(TF_BUILD)' == 'true'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SonarAnalyzer.CSharp" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers" />
+  </ItemGroup>
+
+</Project>
