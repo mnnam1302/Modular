@@ -23,6 +23,10 @@ jobs:
     name: Build & Test
     runs-on: ubuntu-24.04
     timeout-minutes: 10
+    # Job-level permissions replace the workflow-level ones, so contents: read is repeated here.
+    permissions:
+      contents: read
+      checks: write # the test reporter publishes its results as a check run
 
     steps:
       - name: Checkout repository
@@ -32,12 +36,37 @@ jobs:
         uses: actions/setup-dotnet@v6
         with:
           global-json-file: global.json
+          cache: true # NuGet cache, keyed on the packages.lock.json files
 
       - name: Restore
-        run: dotnet restore Modular.slnx
+        run: dotnet restore Modular.slnx --locked-mode
 
       - name: Build
         run: dotnet build Modular.slnx --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test Modular.slnx --configuration Release --no-build
+        run: >-
+          dotnet test Modular.slnx --configuration Release --no-build
+          --logger trx --results-directory TestResults
+          --collect:"XPlat Code Coverage"
+
+      - name: Test report
+        if: always() # also report when tests fail - that's when you need it most
+        uses: dorny/test-reporter@a43b3a5f7366b97d083190328d2c652e1a8b6aa2 # v3.0.0
+        with:
+          name: Test results
+          path: TestResults/*.trx
+          reporter: dotnet-trx
+
+      - name: Coverage summary
+        if: always()
+        uses: irongut/CodeCoverageSummary@51cc3a756ddcd398d447c044c02cb6aa83fdae95 # v1.3.0
+        with:
+          filename: TestResults/*/coverage.cobertura.xml
+          format: markdown
+          output: file
+          fail_below_min: false # report only; the gate comes with the first domain code
+
+      - name: Publish coverage to job summary
+        if: always()
+        run: cat code-coverage-results.md >> "$GITHUB_STEP_SUMMARY"
