@@ -37,6 +37,7 @@ jobs:
         with:
           global-json-file: global.json
           cache: true # NuGet cache, keyed on the packages.lock.json files
+          cache-dependency-path: '**/packages.lock.json' # lock files live in each project folder, not the repo root
 
       - name: Restore
         run: dotnet restore Modular.slnx --locked-mode
@@ -45,13 +46,15 @@ jobs:
         run: dotnet build Modular.slnx --configuration Release --no-restore
 
       - name: Test
+        id: test
         run: >-
           dotnet test Modular.slnx --configuration Release --no-build
           --logger trx --results-directory TestResults
           --collect:"XPlat Code Coverage"
 
       - name: Test report
-        if: always() # also report when tests fail - that's when you need it most
+        # Report when tests fail (that's when you need it most), but not when Test never ran.
+        if: ${{ !cancelled() && steps.test.outcome != 'skipped' }}
         uses: dorny/test-reporter@a43b3a5f7366b97d083190328d2c652e1a8b6aa2 # v3.0.0
         with:
           name: Test results
@@ -59,7 +62,7 @@ jobs:
           reporter: dotnet-trx
 
       - name: Coverage summary
-        if: always()
+        if: ${{ !cancelled() && steps.test.outcome != 'skipped' }}
         uses: irongut/CodeCoverageSummary@51cc3a756ddcd398d447c044c02cb6aa83fdae95 # v1.3.0
         with:
           filename: TestResults/*/coverage.cobertura.xml
@@ -68,5 +71,5 @@ jobs:
           fail_below_min: false # report only; the gate comes with the first domain code
 
       - name: Publish coverage to job summary
-        if: always()
+        if: ${{ !cancelled() && steps.test.outcome != 'skipped' }}
         run: cat code-coverage-results.md >> "$GITHUB_STEP_SUMMARY"
