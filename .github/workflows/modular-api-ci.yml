@@ -23,6 +23,7 @@ jobs:
     name: Build & Test
     runs-on: ubuntu-24.04
     timeout-minutes: 10
+    
     # Job-level permissions replace the workflow-level ones, so contents: read is repeated here.
     permissions:
       contents: read
@@ -52,18 +53,24 @@ jobs:
           --logger trx --results-directory TestResults
           --collect:"XPlat Code Coverage"
 
-      - name: Test report
+      - name: Test reporter
         # Report when tests fail (that's when you need it most), but not when Test never ran.
         if: ${{ !cancelled() && steps.test.outcome != 'skipped' }}
-        uses: dorny/test-reporter@a43b3a5f7366b97d083190328d2c652e1a8b6aa2 # v3.0.0
+        uses: dorny/test-reporter@a43b3a5f7366b97d083190328d2c652e1a8b6aa2
         with:
           name: Test results
           path: TestResults/*.trx
           reporter: dotnet-trx
 
-      - name: Coverage summary
+      # Test projects without tests yet (e.g. Modular.Identity.Tests) write coverage files with no data,
+      # which CodeCoverageSummary can't parse. Remove this step once every test project has tests.
+      - name: Drop empty coverage files
         if: ${{ !cancelled() && steps.test.outcome != 'skipped' }}
-        uses: irongut/CodeCoverageSummary@51cc3a756ddcd398d447c044c02cb6aa83fdae95 # v1.3.0
+        run: grep -L '<package ' TestResults/*/coverage.cobertura.xml | xargs -r rm -v
+
+      - name: Code coverage summary
+        if: ${{ !cancelled() && steps.test.outcome != 'skipped' }}
+        uses: irongut/CodeCoverageSummary@51cc3a756ddcd398d447c044c02cb6aa83fdae95
         with:
           filename: TestResults/*/coverage.cobertura.xml
           format: markdown
