@@ -1,0 +1,78 @@
+{
+  "version": 2,
+  "dependencies": {
+    "net10.0": {
+      "Microsoft.AspNetCore.OpenApi": {
+        "type": "Direct",
+        "requested": "[10.0.12, )",
+        "resolved": "10.0.12",
+        "contentHash": "7RnQ/UKn+kK3JDLmTpW+vVqNErWthGPAVAy1aIiBzv4ucQ6g9NFvOJUuT0PHcpvcJxGVxctMxj6t+NESWMrgHQ==",
+        "dependencies": {
+          "Microsoft.OpenApi": "[2.12.0, 3.0.0)"
+        }
+      },
+      "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
+        "type": "Direct",
+        "requested": "[1.24.1-preview.1, )",
+        "resolved": "1.24.1-preview.1",
+        "contentHash": "C8feSVA3/f2LyLRcPoKv4pxWzpk2LKlEva4ydXszq6aA+p5/qxtM934XviHbZD0tJWyYmeOXtMxioAtBPxVbdQ=="
+      },
+      "SonarAnalyzer.CSharp": {
+        "type": "Direct",
+        "requested": "[10.15.0.120848, )",
+        "resolved": "10.15.0.120848",
+        "contentHash": "1hM3HVRl5jdC/ZBDu+G7CCYLXRGe/QaP01Zy+c9ETPhY7lWD8g8HiefY6sGaH0T3CJ4wAy0/waGgQTh0TYy0oQ=="
+      },
+      "Microsoft.OpenApi": {
+        "type": "Transitive",
+        "resolved": "2.12.0",
+        "contentHash": "0xB/be+f6qYOhvQPUrVsLrau+fkowYv6gt9RIkajMhwT7sZnqtcA797yW3bS5kgSje+AQW4xZgyLnW641YFioQ=="
+      },
+      "modular.shared.application": {
+        "type": "Project"
+      },
+      "modular.shared.contracts": {
+        "type": "Project"
+      },
+      "modular.shared.domain": {
+        "type": "Project"
+      },
+      "modular.shared.infrastructure": {
+        "type": "Project"
+      },
+      "modular.tenancy.application": {
+        "type": "Project",
+        "dependencies": {
+          "Modular.Shared.Application": "[1.0.0, )",
+          "Modular.Tenancy.Contracts": "[1.0.0, )",
+          "Modular.Tenancy.Domain": "[1.0.0, )"
+        }
+      },
+      "modular.tenancy.contracts": {
+        "type": "Project",
+        "dependencies": {
+          "Modular.Shared.Contracts": "[1.0.0, )"
+        }
+      },
+      "modular.tenancy.domain": {
+        "type": "Project",
+        "dependencies": {
+          "Modular.Shared.Domain": "[1.0.0, )"
+        }
+      },
+      "modular.tenancy.endpoints": {
+        "type": "Project",
+        "dependencies": {
+          "Modular.Tenancy.Contracts": "[1.0.0, )"
+        }
+      },
+      "modular.tenancy.infrastructure": {
+        "type": "Project",
+        "dependencies": {
+          "Modular.Shared.Infrastructure": "[1.0.0, )",
+          "Modular.Tenancy.Application": "[1.0.0, )"
+        }
+      }
+    }
+  }
+}
