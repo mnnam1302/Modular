@@ -23,6 +23,11 @@ jobs:
     name: Build & Test
     runs-on: ubuntu-24.04
     timeout-minutes: 10
+    
+    # Job-level permissions replace the workflow-level ones, so contents: read is repeated here.
+    # permissions:
+    #   contents: read
+    #   checks: write the test reporter publishes its results as a check run
 
     steps:
       - name: Checkout repository
@@ -32,12 +37,46 @@ jobs:
         uses: actions/setup-dotnet@v6
         with:
           global-json-file: global.json
+          cache: true # NuGet cache, keyed on the packages.lock.json files
+          cache-dependency-path: '**/packages.lock.json' # lock files live in each project folder, not the repo root
 
       - name: Restore
-        run: dotnet restore Modular.slnx
+        run: dotnet restore Modular.slnx --locked-mode
 
       - name: Build
         run: dotnet build Modular.slnx --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test Modular.slnx --configuration Release --no-build
+        id: test
+        run: >-
+          dotnet test Modular.slnx --configuration Release --no-build
+          --logger trx --results-directory TestResults
+          --collect:"XPlat Code Coverage"
+
+      - name: Test reporter
+        # Report when tests fail (that's when you need it most), but not when Test never ran.
+        if: ${{ !cancelled() && steps.test.outcome != 'skipped' }}
+        uses: dorny/test-reporter@a43b3a5f7366b97d083190328d2c652e1a8b6aa2
+        with:
+          name: Test results
+          path: TestResults/*.trx
+          reporter: dotnet-trx
+
+      # Test projects without tests yet (e.g. Modular.Identity.Tests) write coverage files with no data,
+      # which CodeCoverageSummary can't parse. Remove this step once every test project has tests.
+      - name: Drop empty coverage files
+        if: ${{ !cancelled() && steps.test.outcome != 'skipped' }}
+        run: grep -L '<package ' TestResults/*/coverage.cobertura.xml | xargs -r rm -v
+
+      - name: Code coverage summary
+        if: ${{ !cancelled() && steps.test.outcome != 'skipped' }}
+        uses: irongut/CodeCoverageSummary@51cc3a756ddcd398d447c044c02cb6aa83fdae95
+        with:
+          filename: TestResults/*/coverage.cobertura.xml
+          format: markdown
+          output: file
+          fail_below_min: false # report only; the gate comes with the first domain code
+
+      - name: Publish coverage to job summary
+        if: ${{ !cancelled() && steps.test.outcome != 'skipped' }}
+        run: cat code-coverage-results.md >> "$GITHUB_STEP_SUMMARY"
