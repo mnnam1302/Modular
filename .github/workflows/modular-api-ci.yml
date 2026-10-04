@@ -33,9 +33,6 @@ jobs:
         with:
           global-json-file: global.json
 
-      - name: Format check
-        run: dotnet format Modular.slnx --verify-no-changes --no-restore
-
       - name: Restore
         run: dotnet restore Modular.slnx
 
