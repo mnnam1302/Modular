@@ -216,7 +216,7 @@ dotnet_diagnostic.S1121.severity = none
 ########################################################################
 # Tests — relax rules that fight xUnit conventions
 ########################################################################
-[**/{test,tests}/**.cs]
+[{tests/**.cs,src/**/test/**.cs}]
 dotnet_diagnostic.CA1707.severity = none   # Method_Should_X naming
 dotnet_diagnostic.IDE1006.severity = none
 dotnet_diagnostic.CA1861.severity = none   # constant arrays in [InlineData]
