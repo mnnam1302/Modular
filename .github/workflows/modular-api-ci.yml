@@ -25,9 +25,9 @@ jobs:
     timeout-minutes: 10
     
     # Job-level permissions replace the workflow-level ones, so contents: read is repeated here.
-    permissions:
-      contents: read
-      checks: write # the test reporter publishes its results as a check run
+    # permissions:
+    #   contents: read
+    #   checks: write the test reporter publishes its results as a check run
 
     steps:
       - name: Checkout repository
