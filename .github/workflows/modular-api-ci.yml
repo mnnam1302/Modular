@@ -1,6 +1,5 @@
 name: Modular API CI
 
-# Event triggers
 on:
   push:
     branches: [ master ]
@@ -8,23 +7,19 @@ on:
     branches: [ master ]
   workflow_dispatch: # Allows manual trigger from GitHub UI
 
-# Security permissions
 permissions:
   contents: read
 
-# Cancel outdated PR builds automatically
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
-# Environment variables
 env:
   DOTNET_NOLOGO: true
   DOTNET_CLI_TELEMETRY_OPTOUT: true
 
 jobs:
   build:
-    # This display name is the required status check in the master ruleset. Don't rename it.
     name: Build & Test
     runs-on: ubuntu-24.04
     timeout-minutes: 10
@@ -38,14 +33,14 @@ jobs:
         with:
           global-json-file: global.json
 
+      - name: Format check
+        run: dotnet format Modular.slnx --verify-no-changes --no-restore
+
       - name: Restore
         run: dotnet restore Modular.slnx
 
       - name: Build
         run: dotnet build Modular.slnx --configuration Release --no-restore
-
-      - name: Format check
-        run: dotnet format Modular.slnx --verify-no-changes --no-restore
 
       - name: Test
         run: dotnet test Modular.slnx --configuration Release --no-build
