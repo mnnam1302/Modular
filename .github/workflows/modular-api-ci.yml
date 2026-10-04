@@ -1,0 +1,43 @@
+name: Modular API CI
+
+on:
+  push:
+    branches: [ master ]
+  # pull_request:
+  #   branches: [ master ] # Disable auto-trigger CI on pull request when comming new commit
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+jobs:
+  build:
+    name: Build & Test
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+
+      - name: Restore
+        run: dotnet restore Modular.slnx
+
+      - name: Build
+        run: dotnet build Modular.slnx --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test Modular.slnx --configuration Release --no-build
