@@ -3,8 +3,8 @@ name: Modular API CI
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  # pull_request:
+  #   branches: [ master ]
   workflow_dispatch: # Allows manual trigger from GitHub UI
 
 permissions:
